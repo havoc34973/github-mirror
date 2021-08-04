@@ -1,0 +1,38 @@
+name: 'Git Repo Sync'
+description: 'Git Repo Sync enables you to synchronize code to other code management platforms, such as GitLab, Gitee, etc.'
+
+branding:
+  icon: upload-cloud
+  color: gray-dark
+
+inputs:
+  source-url:
+    description: 'Source Repo URL'
+    required: true
+  source-username:
+    description: 'Source Repo Username'
+    required: true
+  source-token:
+    description: 'Source Token'
+    required: true
+  destination-url:
+    description: 'Destination Repo URL'
+    required: true
+  destination-username:
+    description: 'Destination Repo Username'
+    required: true
+  destination-token:
+    description: 'Destination Token'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: ${{ github.action_path }}/entrypoint.sh
+      shell: bash
+      env:
+        INPUT_SOURCE_URL: ${{ inputs.source-url }}
+        INPUT_SOURCE_USERNAME: ${{ inputs.source-username }}
+        INPUT_SOURCE_TOKEN: ${{ inputs.source-token }}
+        INPUT_DESTINATION_URL: ${{ inputs.destination-url }}
+        INPUT_DESTINATION_USERNAME: ${{ inputs.destination-username }}
+        INPUT_DESTINATION_TOKEN: ${{ inputs.destination-token }}
